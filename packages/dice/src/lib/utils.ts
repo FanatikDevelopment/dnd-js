@@ -5,17 +5,10 @@ import { Chance } from 'chance';
 /**
  * The Random Generator used to roll the dices.
  * @description This generator internally use chance to produce
- * number, you can give it a seed to have a predictable sequence using
- * the **DNDJS_DICE_RANDOM_SEED** environment variable (pass any string
- * of your choice).
+ * number, you can give it a seed to have a predictable sequence using.
  *
  */
-export const DiceRg = new Chance(
-  // Chance is a bit tricky, if you pass undefined it treats it as a value
-  ...(process.env['DNDJS_DICE_RANDOM_SEED']
-    ? [process.env['DNDJS_DICE_RANDOM_SEED']]
-    : [])
-);
+export const DiceRg = new Chance();
 
 /**
  * The regex used to parse dice patterns
