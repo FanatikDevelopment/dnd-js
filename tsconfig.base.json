@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@dnd-js/core": ["packages/core/src/index.ts"],
+      "@dnd-js/dice": ["packages/dice/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
