@@ -36,6 +36,9 @@
         "ci": {
           "ci": true,
           "codeCoverage": true
+        },
+        "coverage": {
+          "codeCoverage": true
         }
       }
     },
