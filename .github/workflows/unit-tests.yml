@@ -1,6 +1,12 @@
 name: dnd.js Unit Tests
 run-name: ${{ github.actor }} is testing out dnd.js 🚀
-on: [push]
+on:
+  push:
+    branches:
+      - 'master'
+      - 'releases/**'
+  pull_request:
+    types: [opened, reopened, edited]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
