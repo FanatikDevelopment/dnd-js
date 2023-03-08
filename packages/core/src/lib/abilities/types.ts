@@ -1,5 +1,4 @@
 import { Dice } from '@dnd-js/dice';
-import { MiddleWare } from '../common/types';
 
 export const AbilityNames = [
   'strength',
