@@ -33,3 +33,48 @@ export interface AbilityApi {
 export interface AbilityBonus extends Partial<AbilityApi> {
   id: string;
 }
+
+export const SkillNames = [
+  'acrobatics',
+  'animal-handling',
+  'arcana',
+  'athletics',
+  'deception',
+  'history',
+  'insight',
+  'intimidation',
+  'investigation',
+  'medicine',
+  'nature',
+  'perception',
+  'performance',
+  'persuasion',
+  'religion',
+  'sleight-of-hand',
+  'stealth',
+  'survival',
+] as const;
+type SkillNameTuple = typeof SkillNames;
+
+export type SkillName = SkillNameTuple[number];
+
+export const SkillAbilityMap: Record<SkillName, AbilityName> = {
+  acrobatics: 'dexterity',
+  'animal-handling': 'wisdom',
+  arcana: 'intelligence',
+  athletics: 'strength',
+  deception: 'charisma',
+  history: 'intelligence',
+  insight: 'wisdom',
+  intimidation: 'charisma',
+  investigation: 'intelligence',
+  medicine: 'wisdom',
+  nature: 'intelligence',
+  perception: 'wisdom',
+  performance: 'charisma',
+  persuasion: 'charisma',
+  religion: 'intelligence',
+  'sleight-of-hand': 'dexterity',
+  stealth: 'dexterity',
+  survival: 'wisdom',
+};
