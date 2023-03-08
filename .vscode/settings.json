@@ -8,5 +8,20 @@
     "**/Thumbs.db": true,
     "node_modules": true
   },
-  "explorerExclude.backup": {}
+  "explorerExclude.backup": {},
+  "cSpell.words": [
+    "dragonborn",
+    "dragonchess",
+    "dwarven",
+    "dwarvish",
+    "greataxe",
+    "greatclub",
+    "greatsword",
+    "handaxe",
+    "longsword",
+    "shortbow",
+    "shortsword",
+    "stonecunning",
+    "warhammer"
+  ]
 }
