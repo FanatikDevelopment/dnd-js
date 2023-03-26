@@ -82,9 +82,9 @@ describe('RaceBuilder', () => {
   });
 
   it('should support non-atomic fields manipulation', () => {
-    builder2.withLanguages('abyssal', 'elf');
-    expect(builder2.languages).toEqual(['common', 'abyssal', 'elf']);
-    builder2.withoutLanguages('common', 'elf');
+    builder2.withLanguages('abyssal', 'elvish');
+    expect(builder2.languages).toEqual(['common', 'abyssal', 'elvish']);
+    builder2.withoutLanguages('common', 'elvish');
     expect(builder2.languages).toEqual(['abyssal']);
 
     builder2
@@ -111,7 +111,7 @@ describe('RaceBuilder', () => {
     const selector = builder2.proficiencySelectors.filter((current) =>
       current.of.includes('longsword')
     );
-    builder2.withoutProficiencySelector(...selector).withProficiencySelector({
+    builder2.withoutProficiencySelectors(...selector).withProficiencySelectors({
       n: 1,
       of: ['shortsword', 'longsword', 'greatsword'],
     });
@@ -146,7 +146,7 @@ describe('RaceBuilder', () => {
       .withAbilityBonuses({ dexterity: 2 })
       .withTraits('feat-1')
       .withProficiencies('alchemist-supplies')
-      .withProficiencySelector({
+      .withProficiencySelectors({
         n: 2,
         of: ['calligrapher-supplies', 'brewer-supplies', 'cartographer-tools'],
       });
