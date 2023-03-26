@@ -1,6 +1,22 @@
 import { Abilities, AbilityName, AbilityNames } from '../abilities/types';
-import { NOf } from '../common/types';
-import { AlignmentShort, ProficiencyName, Race, SizeShort } from './types';
+import {
+  NOf,
+  AlignmentShort,
+  ProficiencyName,
+  SizeShort,
+  LanguageName,
+  DamageResistanceBonus,
+  AbilityBonus,
+  SavingThrows,
+  SavingThrowBonus,
+  SavingThrowType,
+} from '../common/types';
+import {
+  DamageResistances,
+  DamageResistanceType,
+  DamageType,
+} from '../health/types';
+import { Race } from './types';
 
 export default class RaceBuilder {
   public readonly base: Race;
@@ -18,8 +34,14 @@ export default class RaceBuilder {
         size: 'md',
         darkVision: 60,
         languages: [],
+        languageSelectors: [],
         alignments: [],
         abilityBonuses: {},
+        abilityBonusSelectors: [],
+        damageResistances: {},
+        damageResistanceSelectors: [],
+        savingThrows: {},
+        savingThrowSelectors: [],
         proficiencies: [],
         proficiencySelectors: [],
         traits: [],
@@ -66,13 +88,46 @@ export default class RaceBuilder {
     this.result.darkVision = value;
   }
 
-  get languages(): string[] {
+  get savingThrows(): Partial<SavingThrows> {
+    this.result.savingThrows = this.result.savingThrows ?? {
+      ...this.base.savingThrows,
+    };
+    return this.result.savingThrows;
+  }
+
+  set savingThrows(savingThrows: Partial<SavingThrows>) {
+    this.result.savingThrows = savingThrows;
+  }
+
+  get savingThrowSelectors(): NOf<SavingThrowBonus>[] {
+    this.result.savingThrowSelectors = this.result.savingThrowSelectors ?? [
+      ...this.base.savingThrowSelectors,
+    ];
+    return this.result.savingThrowSelectors;
+  }
+
+  set savingThrowSelectors(selectors: NOf<SavingThrowBonus>[]) {
+    this.result.savingThrowSelectors = selectors;
+  }
+
+  get languages(): LanguageName[] {
     this.result.languages = this.result.languages ?? [...this.base.languages];
     return this.result.languages;
   }
 
-  set languages(langs: string[]) {
+  set languages(langs: LanguageName[]) {
     this.result.languages = langs;
+  }
+
+  get languageSelectors(): NOf<LanguageName>[] {
+    this.result.languageSelectors = this.result.languageSelectors ?? [
+      ...this.base.languageSelectors,
+    ];
+    return this.result.languageSelectors;
+  }
+
+  set languageSelectors(selectors: NOf<LanguageName>[]) {
+    this.result.languageSelectors = selectors;
   }
 
   get alignments(): AlignmentShort[] {
@@ -95,6 +150,39 @@ export default class RaceBuilder {
 
   set abilityBonuses(abilityBonuses: Partial<Abilities>) {
     this.result.abilityBonuses = abilityBonuses;
+  }
+
+  get abilityBonusSelectors(): NOf<AbilityBonus>[] {
+    this.result.abilityBonusSelectors =
+      this.result.abilityBonusSelectors ?? this.base.abilityBonusSelectors;
+    return this.result.abilityBonusSelectors;
+  }
+
+  set abilityBonusSelectors(props: NOf<AbilityBonus>[]) {
+    this.result.abilityBonusSelectors = props;
+  }
+
+  get damageResistances(): Partial<DamageResistances> {
+    this.result.damageResistances = this.result.damageResistances ?? {
+      ...this.base.damageResistances,
+    };
+    return this.result.damageResistances;
+  }
+
+  set damageResistances(value: Partial<DamageResistances>) {
+    this.result.damageResistances = value;
+  }
+
+  get damageResistanceSelectors(): NOf<DamageResistanceBonus>[] {
+    this.result.damageResistanceSelectors = this.result
+      .damageResistanceSelectors ?? {
+      ...this.base.damageResistanceSelectors,
+    };
+    return this.damageResistanceSelectors;
+  }
+
+  set damageResistanceSelectors(value: NOf<DamageResistanceBonus>[]) {
+    this.result.damageResistanceSelectors = value;
   }
 
   get proficiencies(): ProficiencyName[] {
@@ -148,13 +236,86 @@ export default class RaceBuilder {
     return this;
   }
 
-  withLanguages(...langs: string[]): this {
+  withLanguages(...langs: LanguageName[]): this {
     this.languages.push(...langs);
     return this;
   }
 
-  withoutLanguages(...langs: string[]): this {
+  withoutLanguages(...langs: LanguageName[]): this {
     this.languages = this.languages.filter((lang) => !langs.includes(lang));
+    return this;
+  }
+
+  withLanguageSelectors(...selectors: NOf<LanguageName>[]): this {
+    this.languageSelectors.push(...selectors);
+    return this;
+  }
+
+  withoutLanguageSelectors(...selectors: NOf<LanguageName>[]): this {
+    this.languageSelectors = this.languageSelectors.filter(
+      (current) => !selectors.includes(current)
+    );
+    return this;
+  }
+
+  withDamageResistances(
+    resistances: Partial<{
+      type: DamageType;
+      resistance: DamageResistanceType;
+    }>
+  ): this {
+    Object.assign(this.damageResistances, resistances);
+    return this;
+  }
+
+  withoutDamageResistances(...resistances: DamageType[]): this {
+    Object.fromEntries(
+      Object.entries(resistances).filter(
+        ([key]) => !resistances.includes(key as DamageType)
+      )
+    );
+    return this;
+  }
+
+  withDamageResistanceSelectors(
+    ...selectors: NOf<DamageResistanceBonus>[]
+  ): this {
+    this.damageResistanceSelectors.push(...selectors);
+    return this;
+  }
+
+  withoutDamageResistanceSelectors(
+    ...selectors: NOf<DamageResistanceBonus>[]
+  ): this {
+    this.damageResistanceSelectors = this.damageResistanceSelectors.filter(
+      (current) => !selectors.includes(current)
+    );
+    return this;
+  }
+
+  withSavingThrows(savingThrows: Partial<SavingThrows>): this {
+    Object.assign(this.savingThrows, savingThrows);
+    return this;
+  }
+
+  withoutSavingThrows(...savingThrows: SavingThrowType[]): this {
+    Object.fromEntries(
+      Object.entries(savingThrows).filter(
+        ([key]) => !savingThrows.includes(key as SavingThrowType)
+      )
+    );
+    return this;
+  }
+
+  withSavingThrowSelectors(...selectors: NOf<SavingThrowBonus>[]): this {
+    this.savingThrowSelectors.push(...selectors);
+    return this;
+  }
+
+  withoutSavingThrowSelectors(...selectors: NOf<SavingThrowBonus>[]): this {
+    this.savingThrowSelectors = this.savingThrowSelectors.filter(
+      (current) => !selectors.includes(current)
+    );
     return this;
   }
 
@@ -173,12 +334,12 @@ export default class RaceBuilder {
   withAbilityBonuses(abilities: Partial<Abilities>): this {
     const bonuses = this.abilityBonuses;
     for (const ability of AbilityNames) {
-      if (!abilities[ability]) {
+      const current = bonuses[ability] ?? 0;
+      const bonus = abilities[ability] ?? 0;
+      if (!bonus) {
         continue;
-      } else if (bonuses[ability]) {
-        bonuses[ability]! += abilities[ability]!;
       } else {
-        bonuses[ability] = abilities[ability];
+        bonuses[ability] = current + bonus;
       }
     }
     return this;
@@ -189,6 +350,18 @@ export default class RaceBuilder {
     for (const ability of abilities) {
       delete bonuses[ability];
     }
+    return this;
+  }
+
+  withAbilityBonusSelectors(...selectors: NOf<AbilityBonus>[]): this {
+    this.abilityBonusSelectors.push(...selectors);
+    return this;
+  }
+
+  withoutAbilityBonusSelectors(...selectors: NOf<AbilityBonus>[]): this {
+    this.abilityBonusSelectors = this.abilityBonusSelectors.filter(
+      (current) => !selectors.includes(current)
+    );
     return this;
   }
 
@@ -204,12 +377,12 @@ export default class RaceBuilder {
     return this;
   }
 
-  withProficiencySelector(...selectors: NOf<ProficiencyName>[]): this {
+  withProficiencySelectors(...selectors: NOf<ProficiencyName>[]): this {
     this.proficiencySelectors.push(...selectors);
     return this;
   }
 
-  withoutProficiencySelector(...selectors: NOf<ProficiencyName>[]): this {
+  withoutProficiencySelectors(...selectors: NOf<ProficiencyName>[]): this {
     this.proficiencySelectors = this.proficiencySelectors.filter(
       (current) => !selectors.includes(current)
     );
