@@ -23,7 +23,13 @@
     "shortbow",
     "shortsword",
     "stonecunning",
+    "tiefling",
     "undercommon",
     "warhammer"
-  ]
+  ],
+
+  "emmet.includeLanguages": {
+    "ejs.vs": "glsl",
+    "ejs.fs": "glsl"
+  }
 }

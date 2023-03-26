@@ -7,7 +7,13 @@
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/jest.config.[jt]s"
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/.storybook/**/*",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+      "!{projectRoot}/.storybook/**/*",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+      "!{projectRoot}/.storybook/**/*",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
     ],
     "sharedGlobals": []
   },
@@ -24,6 +30,15 @@
     },
     "e2e": {
       "inputs": ["default", "^production"]
+    },
+    "build-storybook": {
+      "inputs": [
+        "default",
+        "^production",
+        "!{projectRoot}/.storybook/**/*",
+        "!{projectRoot}/.storybook/**/*",
+        "!{projectRoot}/.storybook/**/*"
+      ]
     }
   },
   "workspaceLayout": {
@@ -34,7 +49,14 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e", "typedoc"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "typedoc",
+          "build-storybook"
+        ]
       }
     }
   },

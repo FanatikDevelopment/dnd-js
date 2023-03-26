@@ -1,0 +1,39 @@
+#version 300 es
+
+in vec4 a_position;
+
+// clang-format off
+<% if (hasNormal) { %>
+      in vec4 a_normal;
+
+      out vec4 v_normal;
+<% } %>
+<% if (hasUv) { %>
+      in vec2 a_uv;
+
+      out vec2 v_uv;
+<% } %>
+    // clang-format on
+
+    // EJS fragment end
+    uniform mat4 u_projectionMat;
+uniform mat4 u_cameraMat;
+uniform mat4 u_modelMat;
+
+out vec4 v_position;
+
+void main() {
+  mat4 viewMatrix = u_projectionMat * u_cameraMat;
+  v_position = u_modelMat * a_position;
+
+  // clang-format off
+  <% if (hasNormal) { %>
+        v_normal = u_modelMat * a_normal;
+  <% } %>
+  <% if (hasUv) { %>
+        v_uv = u_modelMat * a_uv;
+  <% } %>
+      // clang-format on
+
+      gl_Position = viewMatrix * v_position;
+}
