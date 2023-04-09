@@ -1,6 +1,7 @@
 import { SkillNames } from '../abilities';
 import { LanguageNames } from '../common';
 import RaceBuilder from './RaceBuilder';
+import { DragonbornAncestryDamage, DragonbornAncestryTypes } from './types';
 
 export { default as RaceBuilder } from './RaceBuilder';
 export * from './types';
@@ -152,7 +153,15 @@ export const DragonbornBuilder = new RaceBuilder({
   })
   .withAlignments('lg', 'ng', 'cg', 'le', 'ne', 'ce')
   .withLanguages('common', 'draconic')
-  .withTraits('draconic-ancestry', 'breath-weapon', 'damage-resistance'); // handle draconic ancestry
+  .withFragmentSelectors({
+    n: 1,
+    of: DragonbornAncestryTypes.map((type) => ({
+      damageResistances: {
+        [DragonbornAncestryDamage[type]]: 'resist',
+      },
+      traits: [`draconic ancestry ${type}`, `breath weapon ${type}`],
+    })),
+  });
 
 export const BaseRaceBuilders = [
   ElfBuilder,

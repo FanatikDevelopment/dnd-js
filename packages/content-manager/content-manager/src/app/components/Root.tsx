@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import ActivityBar from './ActivityBar';
 import ContentPanel from './ContentPanel';
 import SecondaryBar from './SecondaryBar';

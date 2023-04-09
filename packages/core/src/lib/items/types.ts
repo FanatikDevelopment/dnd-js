@@ -15,7 +15,6 @@ export const ItemTypes = [
   'druidic-foci',
   'equipment-pack',
   'gaming-set',
-  'armor',
   'holy-symbol',
   'kit',
   'weapon',

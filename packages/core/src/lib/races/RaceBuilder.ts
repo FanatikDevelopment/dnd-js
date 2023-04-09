@@ -44,6 +44,7 @@ export default class RaceBuilder {
         savingThrowSelectors: [],
         proficiencies: [],
         proficiencySelectors: [],
+        fragmentSelectors: [],
         traits: [],
       },
       props
@@ -203,6 +204,16 @@ export default class RaceBuilder {
 
   set proficiencySelectors(props: NOf<ProficiencyName>[]) {
     this.result.proficiencySelectors = props;
+  }
+
+  get fragmentSelectors(): NOf<Partial<Race>>[] {
+    this.result.fragmentSelectors =
+      this.result.fragmentSelectors ?? this.base.fragmentSelectors;
+    return this.result.fragmentSelectors;
+  }
+
+  set fragmentSelectors(props: NOf<Partial<Race>>[]) {
+    this.result.fragmentSelectors = props;
   }
 
   get traits(): string[] {
@@ -384,6 +395,18 @@ export default class RaceBuilder {
 
   withoutProficiencySelectors(...selectors: NOf<ProficiencyName>[]): this {
     this.proficiencySelectors = this.proficiencySelectors.filter(
+      (current) => !selectors.includes(current)
+    );
+    return this;
+  }
+
+  withFragmentSelectors(...selectors: NOf<Partial<Race>>[]): this {
+    this.fragmentSelectors.push(...selectors);
+    return this;
+  }
+
+  withoutFragmentSelectors(...selectors: NOf<Partial<Race>>[]): this {
+    this.fragmentSelectors = this.fragmentSelectors.filter(
       (current) => !selectors.includes(current)
     );
     return this;

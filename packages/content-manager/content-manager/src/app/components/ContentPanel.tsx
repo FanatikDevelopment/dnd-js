@@ -1,8 +1,10 @@
-import { BaseRaceBuilders } from '@dnd-js/core';
 import { Box, BoxProps } from '@mui/material';
-import React from 'react';
-import RaceView from './RaceView';
+import { colors } from '../styles/theme';
 
 export default function ContentPanel({ children, ...props }: BoxProps) {
-  return <Box {...props}>{children}</Box>;
+  return (
+    <Box {...props} bgcolor={colors['editor.background']}>
+      {children}
+    </Box>
+  );
 }

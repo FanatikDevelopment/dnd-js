@@ -10,7 +10,7 @@ import {
   SavingThrows,
   SizeShort,
 } from '../common/types';
-import { DamageResistances } from '../health/types';
+import { DamageResistances, DamageType } from '../health/types';
 
 export interface Race {
   name: string;
@@ -28,21 +28,38 @@ export interface Race {
   damageResistanceSelectors: NOf<DamageResistanceBonus>[];
   proficiencies: ProficiencyName[];
   proficiencySelectors: NOf<ProficiencyName>[];
+  fragmentSelectors: NOf<Partial<Race>>[];
   traits: string[];
 }
 
 export const DragonbornAncestryTypes = [
-  'draconic-ancestry-black',
-  'draconic-ancestry-bronze',
-  'draconic-ancestry-copper',
-  'draconic-ancestry-silver',
-  'draconic-ancestry-blue',
-  'draconic-ancestry-green',
-  'draconic-ancestry-red',
-  'draconic-ancestry-brass',
-  'draconic-ancestry-gold',
-  'draconic-ancestry-white',
+  'black',
+  'bronze',
+  'copper',
+  'silver',
+  'blue',
+  'green',
+  'red',
+  'brass',
+  'gold',
+  'white',
 ] as const;
+
+export const DragonbornAncestryDamage: Record<
+  DragonbornAncestryType,
+  DamageType
+> = {
+  black: 'acid',
+  bronze: 'lightning',
+  copper: 'acid',
+  silver: 'cold',
+  blue: 'lightning',
+  green: 'poison',
+  red: 'fire',
+  brass: 'fire',
+  gold: 'fire',
+  white: 'cold',
+};
 
 type DragonbornAncestryTypesTuple = typeof DragonbornAncestryTypes;
 export type DragonbornAncestryType = DragonbornAncestryTypesTuple[number];

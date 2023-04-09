@@ -1,9 +1,13 @@
 import {
   IconButton as MuiIconButton,
   IconButtonProps,
+  Paper,
   Stack,
   styled,
 } from '@mui/material';
+
+import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
+
 import React from 'react';
 
 import RacesIcon from '../icons/Races';
@@ -16,6 +20,7 @@ import MechanicsIcon from '../icons/Mechanics';
 import SidekicksIcon from '../icons/Sidekicks';
 import BackgroundsIcon from '../icons/Backgrounds';
 import { Link } from 'react-router-dom';
+import { colors } from '../styles/theme';
 
 const IconButton = styled(MuiIconButton)<IconButtonProps>(() => ({
   width: '4rem',
@@ -38,16 +43,38 @@ export function ActivityBar() {
     { path: '/mechanics', icon: <MechanicsIcon /> },
     { path: '/sidekicks', icon: <SidekicksIcon /> },
     { path: '/backgrounds', icon: <BackgroundsIcon /> },
+    {
+      path: '/terrain',
+      icon: <ExploreOutlinedIcon sx={{ width: '2rem', height: '2rem' }} />,
+    },
   ];
 
   return (
-    <Stack direction="column" spacing={1} p="0.5rem">
-      {views.map((current) => (
-        <Link to={current.path} key={current.path}>
-          <IconButton>{current.icon}</IconButton>
-        </Link>
-      ))}
-    </Stack>
+    <Paper
+      sx={{
+        borderRadius: 0,
+        background: colors['activityBar.background'],
+        color: colors['activityBar.inactiveForeground'],
+        fill: colors['activityBar.inactiveForeground'],
+        stroke: colors['activityBar.inactiveForeground'],
+      }}
+    >
+      <Stack direction="column" spacing={1} p="0.5rem">
+        {views.map((current) => (
+          <Link to={current.path} key={current.path}>
+            <IconButton
+              sx={{
+                fill: colors['activityBar.inactiveForeground'],
+                stroke: colors['activityBar.inactiveForeground'],
+                color: colors['activityBar.inactiveForeground'],
+              }}
+            >
+              {current.icon}
+            </IconButton>
+          </Link>
+        ))}
+      </Stack>
+    </Paper>
   );
 }
 
