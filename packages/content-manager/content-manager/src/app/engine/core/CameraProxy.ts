@@ -184,8 +184,8 @@ export default class CameraProxy implements Camera {
             this.position[0] + w,
             this.position[1] - h,
             this.position[1] + h,
-            this.position[2] - this.near,
-            this.position[2] - this.far
+            -(this.target[2] - this.near),
+            -(this.target[2] - this.far)
           );
         }
         break;

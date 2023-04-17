@@ -25,7 +25,7 @@ export default class CameraProxy implements Camera {
     this._far = 1000;
     this._fov = glMatrix.toRadian(70);
 
-    this._position = new Vec3Proxy({ y: 2, z: 3 });
+    this._position = new Vec3Proxy({ x: 1, y: 2, z: 3 });
     this._target = new Vec3Proxy();
     this._up = new Vec3Proxy({ y: 1 });
 
@@ -114,8 +114,10 @@ export default class CameraProxy implements Camera {
     switch (this.type) {
       case 'orthographic':
         {
-          const w = this.surface.width / 2;
-          const h = this.surface.height / 2;
+          const dist = vec3.dist(this.positionVec, this.targetVec);
+          const ratio = this.surface.width / this.surface.height;
+          const w = (dist * ratio) / 2;
+          const h = dist / 2;
 
           mat4.ortho(
             this._projectionMatrix,
@@ -123,7 +125,7 @@ export default class CameraProxy implements Camera {
             this.position.x + w,
             this.position.y - h,
             this.position.y + h,
-            this.position.z - this.near,
+            this.position.z + this.near,
             this.position.z - this.far
           );
         }

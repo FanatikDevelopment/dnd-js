@@ -1,7 +1,7 @@
+import { Rect, RectOptions } from '../math';
 import {
   BufferObjectOptions,
   Color,
-  Rect,
   ShaderOptions,
   ShaderProgramOptions,
 } from './types';
@@ -44,9 +44,15 @@ export default class RendererProxy {
     };
 
     this._clearBufferBits =
-      options?.clearBufferBits ?? gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT;
+      options?.clearBufferBits !== undefined
+        ? options.clearBufferBits
+        : gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT;
 
     setClearColor(gl, this._clearColor);
+  }
+
+  public get canvas(): HTMLCanvasElement | OffscreenCanvas {
+    return this.gl.canvas;
   }
 
   public async init<T = void>(f: (rend: RendererProxy) => T): Promise<T> {
@@ -69,7 +75,7 @@ export default class RendererProxy {
     return Promise.resolve(f(this));
   }
 
-  public resizeViewport(rect?: Rect): void {
+  public resizeViewport(rect?: Rect | RectOptions): void {
     return resizeViewport(this.gl, rect);
   }
 

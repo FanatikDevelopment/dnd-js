@@ -7,18 +7,6 @@ export interface Color {
   a: number;
 }
 
-export interface Size {
-  width: number;
-  height: number;
-}
-
-export interface Rect extends Size {
-  width: number;
-  height: number;
-}
-
-export type RectOptions = Partial<Rect> & Pick<Rect, 'width' | 'height'>;
-
 export type ShaderType = 'vertex' | 'fragment';
 
 export interface Vector2 {

@@ -57,17 +57,25 @@ export interface IQuat {
   arr: quat;
 }
 
-export interface Rect extends Vec2 {
+export interface Size {
   width: number;
   height: number;
 }
 
+export interface Rect extends Vec2, Size {}
+
 export type RectOptions = Partial<Rect> & Pick<Rect, 'width' | 'height'>;
 
 export interface Transform {
-  position: vec3;
-  orientation: quat;
-  scale: vec3;
+  position: Vec3;
+  orientation: Quat;
+  scale: Vec3;
+}
+
+export interface TransformOptions {
+  position: Vec3Options;
+  orientation: QuatOptions;
+  scale: Vec3Options;
 }
 
 export type CameraType = 'perspective' | 'orthographic' | 'frustum';

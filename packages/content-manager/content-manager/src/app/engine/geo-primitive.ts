@@ -1,3 +1,42 @@
+export const planeVertices: [number, number, number][] = [
+  [0, 0, 0], // 0
+  [0, 0, 1], // 1
+  [1, 0, 0], // 2
+  [1, 0, 1], // 3
+];
+
+export const planeUvs: [number, number][] = [
+  [0, 0], // 0
+  [0, 1], // 1
+  [1, 0], // 2
+  [1, 1], // 3
+];
+
+export const planeIndices: number[] = [0, 1, 2, 2, 1, 3];
+
+export const circleVertices = (count: number): [number, number, number][] => {
+  const angle = (2 * Math.PI) / count;
+  const result: [number, number, number][] = [[0, 0, 0]];
+  result.push(
+    ...[...Array(count + 1)].map((_, index): [number, number, number] => [
+      Math.cos(index * angle),
+      0,
+      Math.sin(index * angle),
+    ])
+  );
+
+  return result;
+};
+
+export const circleIndices = (count: number): number[] => {
+  const result = [...Array(count)]
+    .map((_, index) => [0, index + 1, index + 2])
+    .flat();
+
+  result[result.length - 1] = 1;
+  return result;
+};
+
 export const cubeVertices: [number, number, number][] = [
   //Front
   [0, 0, 1], // 0

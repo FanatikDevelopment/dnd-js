@@ -1,9 +1,9 @@
-import { Quat, Transform, Vec3 } from './types';
+import { Quat, Vec3, Transform, TransformOptions } from './types';
 import QuatProxy from './QuatProxy';
 import Vec3Proxy from './Vec3Proxy';
 import { mat3, mat4, quat, vec3 } from 'gl-matrix';
 
-export default class TransformProxy {
+export default class TransformProxy implements Transform {
   private _position: Vec3Proxy;
   private _orientation: QuatProxy;
   private _scale: Vec3Proxy;
@@ -12,13 +12,21 @@ export default class TransformProxy {
   private _normalMatrix: mat3;
   private _isUpToDate: boolean;
 
-  constructor(options?: Partial<Transform>) {
+  constructor(options?: TransformOptions) {
     this._position = new Vec3Proxy(options?.position);
     this._orientation = new QuatProxy(options?.orientation);
     this._scale = new Vec3Proxy(options?.scale ?? [1, 1, 1]);
 
     this._localMatrix = mat4.identity(mat4.create());
     this._normalMatrix = mat3.identity(mat3.create());
+    this._isUpToDate = false;
+  }
+
+  setOptions(options: TransformOptions) {
+    this._position.reset(options.position);
+    this._orientation.reset(options.orientation);
+    this._scale.reset(options.scale);
+
     this._isUpToDate = false;
   }
 

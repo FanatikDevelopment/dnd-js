@@ -6,10 +6,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import RaceView from './app/components/RaceView';
 import Root from './app/components/Root';
+import GlRoot from './app/components/graphics/Root';
 import Terrain from './app/components/Terrain/Terrain';
 import ErrorPage from './app/ErrorPage';
 import ItemManagement from './app/ItemManagement';
 import { theme } from './app/styles/theme';
+
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 
 import './index.css';
 
@@ -41,15 +45,23 @@ const router = createBrowserRouter([
     ],
     errorElement: <ErrorPage />,
   },
+  {
+    path: '/graphics',
+    element: <GlRoot />,
+    errorElement: <ErrorPage />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
-  <StrictMode>
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
-  </StrictMode>
+  <Provider store={store}>
+    <StrictMode>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </StrictMode>
+  </Provider>
 );

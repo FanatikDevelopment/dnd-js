@@ -1,8 +1,8 @@
 import { vec4 } from 'gl-matrix';
+import { Rect, RectOptions } from '../math';
 import {
   BufferObjectOptions,
   Color,
-  Rect,
   ShaderOptions,
   ShaderProgramOptions,
   TextureOptions,
@@ -24,7 +24,10 @@ export function setClearColor(gl: WebGL2RenderingContext, color: Color) {
   gl.clearColor(color.r, color.g, color.b, color.a);
 }
 
-export function resizeViewport(gl: WebGL2RenderingContext, rect?: Rect) {
+export function resizeViewport(
+  gl: WebGL2RenderingContext,
+  rect?: Rect | RectOptions
+) {
   gl.viewport(
     rect?.x ?? 0,
     rect?.y ?? 0,
