@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
-import { RendererOptions, RendererProxy } from '../engine/core';
 import { registerRenderer } from '../features/renderer.slice';
+
+import { RendererProxy, RendererOptions } from '@dnd-js/render-engine';
 
 function initCanvas(
   canvas: HTMLCanvasElement

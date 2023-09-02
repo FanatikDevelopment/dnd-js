@@ -1,14 +1,14 @@
 import { Paper } from '@mui/material';
-import { quat, vec3 } from 'gl-matrix';
-import React, { useEffect, useRef, useState } from 'react';
-import { RendererProxy, ShaderProgramProxy } from '../../engine/core';
+import { quat } from 'gl-matrix';
+import { useEffect, useRef, useState } from 'react';
+import { RendererProxy, ShaderProgramProxy } from '@dnd-js/render-engine';
 import { circleIndices, circleVertices } from '../../engine/geo-primitive';
 import { tryGetRenderer } from '../../features/renderer.slice';
 import { useRenderer } from '../../hooks/useRenderer';
 import { useResizeObserver } from '../../hooks/useResizeObserver';
 import useScene from '../../hooks/useScene';
 import useShaderFactory from '../../hooks/useShaderFactory';
-import { BaseFragShader, BaseVertShader, ShaderFactory } from './shaders';
+import { BaseFragShader, BaseVertShader } from './shaders';
 
 export type VertexAttributeName = 'position' | 'uv' | 'normal' | 'color';
 

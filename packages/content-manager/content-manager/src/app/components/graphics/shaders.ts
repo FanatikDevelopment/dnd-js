@@ -1,5 +1,4 @@
-import ShaderBuilder from '../../engine/shader-factory/ShaderBuilder';
-import ShaderProgramFactory from '../../engine/shader-factory/ShaderProgramFactory';
+import { ShaderBuilder, ShaderProgramFactory } from '@dnd-js/render-engine';
 
 export const BaseVertShader = {
   builder: new ShaderBuilder()

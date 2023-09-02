@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import { TransformProxy } from '../engine/math';
-import CameraProxy from '../engine/math/CameraProxy';
+
+import { CameraProxy, TransformProxy } from '@dnd-js/render-engine';
 
 export interface Scene {
   camera: CameraProxy;

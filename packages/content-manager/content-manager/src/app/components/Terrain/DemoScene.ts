@@ -4,17 +4,17 @@ import { v4 as uuid } from 'uuid';
 import {
   createTexture,
   loadImage,
+  CameraProxy,
+  LightProxy,
+  MaterialProxy,
+  ShaderBuilder,
+  ShaderProgramFactory,
+  TransformProxy,
   RendererProxy,
   SceneProxy,
   SceneProxyOptions,
-} from '../../engine/core';
-import CameraProxy from '../../engine/math/CameraProxy';
+} from '@dnd-js/render-engine';
 import { createCube, meshToArray } from '../../engine/geo-primitive';
-import ShaderBuilder from '../../engine/shader-factory/ShaderBuilder';
-import ShaderProgramFactory from '../../engine/shader-factory/ShaderProgramFactory';
-import { TransformProxy } from '../../engine/math';
-import MaterialProxy from '../../engine/core/MaterialProxy';
-import LightProxy from '../../engine/core/LightProxy';
 
 const baseVertShader = {
   props: new ShaderBuilder()

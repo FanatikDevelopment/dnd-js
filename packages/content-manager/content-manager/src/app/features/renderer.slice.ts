@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RendererProxy } from '../engine/core';
+import { RendererProxy } from '@dnd-js/render-engine';
 import { Rect, RectOptions } from '../engine/math';
 import { RootState } from '../store';
 

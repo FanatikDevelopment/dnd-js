@@ -10,8 +10,7 @@ import {
   SceneProxyOptions,
   ShaderProgramProxy,
 } from '../../engine/core';
-import CameraProxy from '../../engine/core/CameraProxy';
-import ShaderBuilder from '../../engine/core/ShaderFactory';
+import { CameraProxy, ShaderBuilder } from '@dnd-js/render-engine';
 import { createCube, meshToArray } from '../../engine/geo-primitive';
 import ShaderProgramFactory from '../../engine/shader-factory/ShaderProgramFactory';
 

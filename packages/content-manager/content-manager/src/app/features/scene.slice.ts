@@ -5,7 +5,8 @@ import {
   TransformOptions,
   TransformProxy,
 } from '../engine/math';
-import CameraProxy from '../engine/math/CameraProxy';
+
+import { CameraProxy } from '@dnd-js/render-engine';
 import { RootState } from '../store';
 import { getRenderer } from './renderer.slice';
 

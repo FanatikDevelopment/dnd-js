@@ -1,7 +1,10 @@
 import React, { useRef } from 'react';
-import { RendererProxy, ShaderProgramProxy } from '../engine/core';
-import { ShaderProps } from '../engine/shader-factory/types';
-import ShaderProgramFactory from '../engine/shader-factory/ShaderProgramFactory';
+import {
+  RendererProxy,
+  ShaderProgramProxy,
+  ShaderProgramFactory,
+  ShaderProps,
+} from '@dnd-js/render-engine';
 
 type Props = {
   renderer: RendererProxy | null;
