@@ -1,3 +1,4 @@
+import { Effect } from '../common';
 import { CurrencyShortName, ItemType, MarketValue, Item } from './types';
 
 export type ItemBuilderOptions<T = unknown> = Pick<
@@ -17,6 +18,7 @@ export default class ItemBuilder<T = unknown> {
         cost: {},
         weight: 0,
         description: '',
+        effects: [],
       },
       options
     ) as Item<T>;
@@ -73,6 +75,15 @@ export default class ItemBuilder<T = unknown> {
     this.result.description = value;
   }
 
+  get effects(): Effect[] {
+    this.result.effects = this.result.effects ?? [...this.base.effects];
+    return this.result.effects;
+  }
+
+  set effects(effects: Effect[]) {
+    this.effects.push(...effects);
+  }
+
   get extra(): T | undefined {
     this.result.extra = this.result.extra ?? this.base.extra;
     return this.result.extra;
@@ -95,23 +106,16 @@ export default class ItemBuilder<T = unknown> {
     return this;
   }
 
-  withoutCost(cost: MarketValue): this {
-    for (const currency in cost) {
-      const value = Math.max(
-        0,
-        (this.cost[currency as CurrencyShortName] ?? 0) -
-          cost[currency as CurrencyShortName]!
-      );
-      this.cost[currency as CurrencyShortName] = value;
-    }
+  withEffect(...effects: Effect[]): this {
+    this.effects.push(...effects);
+
     return this;
   }
 
   build(): Item<T> {
-    return Object.assign<Partial<Item<T>>, Item<T>, Partial<Item<T>>>(
-      {},
-      this.base,
-      this.result
-    ) as Item<T>;
+    return {
+      ...this.base,
+      ...this.result,
+    };
   }
 }

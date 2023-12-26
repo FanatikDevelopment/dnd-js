@@ -12,7 +12,7 @@ import {
 } from '../common/types';
 import { DamageResistances, DamageType } from '../health/types';
 
-export interface Race {
+export type Race = {
   name: string;
   size: SizeShort;
   speed: number;
@@ -30,7 +30,7 @@ export interface Race {
   proficiencySelectors: NOf<ProficiencyName>[];
   fragmentSelectors: NOf<Partial<Race>>[];
   traits: string[];
-}
+};
 
 export const DragonbornAncestryTypes = [
   'black',

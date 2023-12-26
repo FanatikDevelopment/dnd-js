@@ -44,6 +44,25 @@ export type ProficiencyName =
   | SkillName
   | 'shields';
 
+export type AbilityBonus = { ability: AbilityName; bonus: number };
+export type DamageResistanceBonus = {
+  type: DamageType;
+  resistance: DamageResistances;
+};
+
+export type RollModifier = 'advantage' | 'disadvantage';
+
+export type SavingThrowType = AbilityName | DamageType | ConditionName;
+
+export type SavingThrows = {
+  [k in SavingThrowType]: RollModifier;
+};
+
+export type SavingThrowBonus = {
+  type: SavingThrowType;
+  bonus: RollModifier;
+};
+
 export interface MiddleWare<Api> {
   next?: MiddleWare<Api>;
   api: Api;
@@ -74,21 +93,11 @@ export const checkNOf =
     }
   };
 
-export type AbilityBonus = { ability: AbilityName; bonus: number };
-export type DamageResistanceBonus = {
-  type: DamageType;
-  resistance: DamageResistances;
-};
+export type Effect = {
+  name: string;
+  description: string;
 
-export type RollModifier = 'advantage' | 'disadvantage';
-
-export type SavingThrowType = AbilityName | DamageType | ConditionName;
-
-export type SavingThrows = {
-  [k in SavingThrowType]: RollModifier;
-};
-
-export type SavingThrowBonus = {
-  type: SavingThrowType;
-  bonus: RollModifier;
+  canApply: (source: unknown, target: unknown) => boolean;
+  apply: (source: unknown, target: unknown, ...args: any) => any;
+  unapply: (source: unknown, target: unknown, ...args: any) => any;
 };

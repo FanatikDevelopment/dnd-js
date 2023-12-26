@@ -45,6 +45,14 @@ export interface Armor<T = unknown> extends Item<T> {
   stealthDisadvantage: boolean;
 }
 
+export function isArmor<T = unknown>(item: Item<T>): item is Armor<T> {
+  return item.itemType === 'armor';
+}
+
 export interface Shield<T = unknown> extends Item<T> {
   armorClassBonus: number;
+}
+
+export function isShield<T = unknown>(item: Item<T>): item is Shield<T> {
+  return item.itemType === 'shield';
 }

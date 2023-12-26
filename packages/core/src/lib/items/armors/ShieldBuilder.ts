@@ -13,17 +13,11 @@ export default class ShieldBuilder<T = unknown> extends ItemBuilder<T> {
 
   constructor(options: ShieldBuilderOptions<T>) {
     super({ ...options, itemType: 'shield' });
-    this.base = Object.assign<
-      Partial<Shield<T>>,
-      Partial<Shield<T>>,
-      Partial<Shield<T>>
-    >(
-      {
-        armorClassBonus: 2,
-      },
-      super.base,
-      options
-    ) as Shield<T>;
+    this.base = {
+      armorClassBonus: 2,
+      ...super.base,
+      ...options,
+    };
 
     this.result = {};
   }
@@ -40,6 +34,6 @@ export default class ShieldBuilder<T = unknown> extends ItemBuilder<T> {
   }
 
   override build(): Shield<T> {
-    return Object.assign({}, this.base, this.result) as Shield<T>;
+    return { ...this.base, ...this.result } as Shield<T>;
   }
 }

@@ -89,3 +89,7 @@ export interface Weapon<T = unknown> extends Item<T> {
   throwable: boolean;
   properties: WeaponProperty[];
 }
+
+export function isWeapon<T = unknown>(item: Item<T>): item is Weapon<T> {
+  return item.itemType === 'weapon';
+}

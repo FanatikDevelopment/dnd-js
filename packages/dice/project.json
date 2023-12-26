@@ -5,7 +5,7 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/vite:build",
+      "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/dice"
@@ -19,24 +19,19 @@
       "dependsOn": ["build"]
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["packages/dice/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/dice/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "packages/dice/jest.config.ts"
       },
       "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        },
         "coverage": {
           "codeCoverage": true
         }
@@ -44,7 +39,7 @@
     },
     "typedoc": {
       "executor": "@enio.ai/typedoc:typedoc",
-      "outputs": ["docs/packages/dice"],
+      "outputs": ["{workspaceRoot}/docs/packages/dice"],
       "options": {
         "options": "typedoc.json"
       },

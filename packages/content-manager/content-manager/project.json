@@ -5,7 +5,7 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/vite:build",
+      "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -21,7 +21,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/vite:dev-server",
+      "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "content-manager-content-manager:build"
@@ -38,7 +38,7 @@
       }
     },
     "preview": {
-      "executor": "@nrwl/vite:preview-server",
+      "executor": "@nx/vite:preview-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "content-manager-content-manager:build"
@@ -53,15 +53,17 @@
       }
     },
     "test": {
-      "executor": "@nrwl/vite:test",
-      "outputs": ["coverage/packages/content-manager/content-manager"],
+      "executor": "@nx/vite:test",
+      "outputs": [
+        "{workspaceRoot}/coverage/packages/content-manager/content-manager"
+      ],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../coverage/packages/content-manager/content-manager"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
@@ -70,11 +72,10 @@
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@nx/storybook:storybook",
       "options": {
         "port": 4400,
-        "configDir": "packages/content-manager/content-manager/.storybook",
-        "uiFramework": "@storybook/react"
+        "configDir": "packages/content-manager/content-manager/.storybook"
       },
       "configurations": {
         "ci": {
@@ -83,12 +84,11 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/storybook:build",
+      "executor": "@nx/storybook:build",
       "outputs": ["{options.outputDir}"],
       "options": {
         "outputDir": "dist/storybook/content-manager-content-manager",
-        "configDir": "packages/content-manager/content-manager/.storybook",
-        "uiFramework": "@storybook/react"
+        "configDir": "packages/content-manager/content-manager/.storybook"
       },
       "configurations": {
         "ci": {
