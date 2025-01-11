@@ -1,5 +1,5 @@
 import { createMachine } from 'xstate';
-import { Combatant } from './types';
+import { Combatant } from '../combat/types';
 
 export type CombatEvent =
   | {

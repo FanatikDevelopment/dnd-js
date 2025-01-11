@@ -98,6 +98,6 @@ export type Effect = {
   description: string;
 
   canApply: (source: unknown, target: unknown) => boolean;
-  apply: (source: unknown, target: unknown, ...args: any) => any;
-  unapply: (source: unknown, target: unknown, ...args: any) => any;
+  apply: (source: unknown, target: unknown, ...args: unknown[]) => unknown;
+  unapply: (source: unknown, target: unknown, ...args: unknown[]) => unknown;
 };

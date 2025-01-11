@@ -1,11 +1,8 @@
 import {
   Box,
-  Card,
   MenuItem,
   Select,
   Stack,
-  Tab,
-  Tabs,
   TextField,
   Typography,
   Collapse,
@@ -19,13 +16,13 @@ import {
 import ExpandLessIcon from '@mui/icons-material/ExpandLessOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMoreOutlined';
 
-import { HTMLProps, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import DemoScene from './DemoScene';
 
 import { Renderer } from '../../engine';
-import { CameraType } from '../../engine/core/types';
-import { glMatrix, mat4, quat, vec3 } from 'gl-matrix';
+import { glMatrix, quat } from 'gl-matrix';
 import { colors } from '../../styles/theme';
+import { CameraType } from '@dnd-js/render-engine';
 
 /* eslint-disable-next-line */
 export interface TerrainProps {}

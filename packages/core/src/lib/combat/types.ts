@@ -1,3 +1,5 @@
+import { AbilityName, SkillName } from '../abilities/types';
+
 export interface Combatant {
   id: string;
   isDead: boolean;
@@ -5,7 +7,7 @@ export interface Combatant {
   actions: number;
   bonusActions: number;
 
-  rollInitiative(): number;
+  roll: (skill: SkillName | AbilityName) => number;
   onReactionTrigger(
     source: unknown,
     event: unknown,
